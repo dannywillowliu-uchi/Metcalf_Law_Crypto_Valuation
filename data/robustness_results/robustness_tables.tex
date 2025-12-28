@@ -1,0 +1,102 @@
+
+% Table: Granger Causality Tests
+\begin{table}[H]
+\centering
+\begin{threeparttable}
+\caption{Granger Causality Test Results}
+\label{tab:granger}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Network} & \multicolumn{2}{c}{\textbf{Users $\to$ Mcap}} & \multicolumn{2}{c}{\textbf{Mcap $\to$ Users}} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+& p-value & Lag & p-value & Lag \\
+\midrule
+Ethereum & 0.391 & 7 & 0.000 & 10 \\
+Render & 0.335 & 1 & 0.000 & 10 \\
+Optimism & 0.009 & 5 & 0.094 & 1 \\
+Arbitrum & 0.118 & 8 & 0.096 & 7 \\
+Dimo & 0.000 & 8 & 0.000 & 7 \\
+Polygon & 0.328 & 1 & 0.008 & 7 \\
+Ens & 0.001 & 1 & 0.023 & 1 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes:} Granger causality tests on log-differenced series. p-values shown are minimum across lags 1-10.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+
+% Table: Hypothesis Tests for β = 1
+\begin{table}[H]
+\centering
+\begin{threeparttable}
+\caption{Hypothesis Tests: $H_0: \beta = 1$}
+\label{tab:hypothesis}
+\begin{tabular}{lrrrrl}
+\toprule
+\textbf{Network} & $\boldsymbol{\beta}$ & \textbf{SE} & \textbf{t-stat} & \textbf{p-value} & \textbf{Classification} \\
+\midrule
+Ethereum & 1.52 & 0.021 & 24.93 & 0.000* & Super-linear \\
+Render & 1.39 & 0.022 & 17.83 & 0.000* & Super-linear \\
+Optimism & 0.99 & 0.030 & -0.32 & 0.748 & Linear \\
+Arbitrum & 0.20 & 0.041 & -19.65 & 0.000* & Sub-linear \\
+Dimo & 0.12 & 0.014 & -62.51 & 0.000* & Sub-linear \\
+Polygon & -0.10 & 0.018 & -61.33 & 0.000* & Sub-linear \\
+Ens & -0.25 & 0.021 & -58.40 & 0.000* & Sub-linear \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes:} t-statistics test $H_0: \beta = 1$. * indicates significance at 5\% level.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+
+% Table: Out-of-Sample Prediction Performance
+\begin{table}[H]
+\centering
+\begin{threeparttable}
+\caption{Out-of-Sample Prediction Performance}
+\label{tab:prediction}
+\begin{tabular}{lrrrrr}
+\toprule
+\textbf{Network} & \textbf{Train $R^2$} & \textbf{Test $R^2$} & \textbf{RMSE} & \textbf{MAPE (\%)} & \textbf{Dir. Acc.} \\
+\midrule
+Ethereum & 0.69 & -6.30 & 0.880 & 3.2 & 53.1% \\
+Render & 0.71 & -13.45 & 1.273 & 5.5 & 53.8% \\
+Optimism & 0.50 & -6.20 & 1.376 & 5.8 & 51.8% \\
+Arbitrum & 0.22 & -6.54 & 0.616 & 2.8 & 49.1% \\
+Dimo & 0.12 & -3.48 & 0.610 & 3.0 & 51.7% \\
+Polygon & 0.05 & -2.59 & 0.650 & 2.4 & 51.6% \\
+Ens & 0.08 & -2.15 & 0.550 & 2.1 & 45.8% \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes:} 70/30 train/test split. RMSE and MAPE in log space. Direction accuracy measures correct prediction of daily change direction.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+
+% Table: BTC-Controlled Regression
+\begin{table}[H]
+\centering
+\begin{threeparttable}
+\caption{Network Effects with Bitcoin Control}
+\label{tab:btc_control}
+\begin{tabular}{lrrrrr}
+\toprule
+\textbf{Network} & $\boldsymbol{\beta}$ (base) & $\boldsymbol{\beta}$ (BTC ctrl) & $\boldsymbol{\beta}_{BTC}$ & \textbf{Change (\%)} & $\boldsymbol{R^2}$ \\
+\midrule
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes:} Base model: $\log(Mcap) = \alpha + \beta \log(Users)$. BTC control model adds $\log(BTC\_Price)$. Change shows percentage change in user coefficient.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

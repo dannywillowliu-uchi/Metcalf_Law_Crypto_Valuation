@@ -76,17 +76,25 @@ network-effects-analyzer/
 │   │   ├── *_correlated_data.csv  # Network data (users + market cap)
 │   │   └── regression_results_expanded.csv
 │   └── raw/                       # Raw data sources
-├── scripts/                       # Analysis scripts
+├── scripts/                       # Analysis and utility scripts
 │   ├── run_full_regression.py     # Main regression analysis
 │   ├── create_time_series_figure.py
 │   ├── generate_per_token_graphs.py
-│   └── robustness_analysis.py
+│   ├── robustness_analysis.py
+│   ├── analysis/                  # Network analysis scripts
+│   ├── data_collection/           # Data gathering scripts
+│   └── utilities/                 # Helper scripts
+├── queries/                       # Dune Analytics SQL queries
+│   ├── dune_query_*.sql          # Network-specific queries
+│   └── dune_query_ids.json       # Query ID mapping
 ├── src/                           # Framework code
 │   ├── analysis/
 │   │   ├── metcalfe_model.py      # Core Metcalfe's Law model
 │   │   └── markov_switching.py    # Markov-switching extension
 │   └── data_collection/           # Data collection utilities
-└── dune_query_*.sql               # Dune Analytics queries
+└── tests/                         # Test suite
+    ├── unit/                      # Unit tests
+    └── integration/               # Integration tests
 ```
 
 ## 🔬 Framework Usage

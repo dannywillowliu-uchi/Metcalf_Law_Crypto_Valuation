@@ -1,0 +1,557 @@
+{
+  "ethereum": {
+    "n_obs": 3235,
+    "granger_causality": {
+      "users_causes_mcap": {
+        "min_pvalue": 0.391093906457304,
+        "best_lag": 7,
+        "all_pvalues": [
+          0.45919451268748357,
+          0.8313199950138732,
+          0.9313605659146573,
+          0.7001272933488795,
+          0.8713603586175123,
+          0.6464685979990235,
+          0.391093906457304,
+          0.4112313363841964,
+          0.46226416317176244,
+          0.5492069408133275
+        ]
+      },
+      "mcap_causes_users": {
+        "min_pvalue": 1.8349706025035582e-08,
+        "best_lag": 10,
+        "all_pvalues": [
+          0.46570129680455563,
+          0.010719538401787835,
+          0.0028186500046094775,
+          0.002454779345626189,
+          4.913342583632317e-05,
+          1.2543960461383825e-07,
+          3.4514966198195315e-06,
+          1.9319735217161683e-05,
+          2.9345622119902095e-08,
+          1.8349706025035582e-08
+        ]
+      }
+    },
+    "out_of_sample": {
+      "train_size": 2264,
+      "test_size": 971,
+      "beta_train": 1.3156424424031194,
+      "r2_train": 0.691743879254604,
+      "r2_test": -6.297320873647364,
+      "rmse": 0.8795809342983743,
+      "mae": 0.8453975259097676,
+      "mape": 3.1753858791288407,
+      "direction_accuracy": 0.5309278350515464
+    },
+    "controlled_regression": {
+      "error": "BTC data not available"
+    },
+    "hypothesis_test": {
+      "beta": 1.5163243958730934,
+      "se": 0.020709070889395994,
+      "h0_beta_equals_1": {
+        "t_statistic": 24.932282024176928,
+        "p_value": 0.0,
+        "reject_h0": true
+      },
+      "confidence_interval_95": [
+        1.4757201615338638,
+        1.556928630212323
+      ],
+      "contains_one": false,
+      "classification": "Significantly super-linear (\u03b2 > 1)"
+    }
+  },
+  "render": {
+    "n_obs": 1830,
+    "granger_causality": {
+      "users_causes_mcap": {
+        "min_pvalue": 0.3345230705497877,
+        "best_lag": 1,
+        "all_pvalues": [
+          0.3345230705497877,
+          0.6264219215232414,
+          0.7855308107849803,
+          0.7711601426669485,
+          0.7238555209771111,
+          0.7757602695505905,
+          0.6414874748818964,
+          0.7388625776330927,
+          0.5774492027800939,
+          0.6390536599874586
+        ]
+      },
+      "mcap_causes_users": {
+        "min_pvalue": 4.2764592888031986e-09,
+        "best_lag": 10,
+        "all_pvalues": [
+          0.00011284839784181453,
+          4.95316712777105e-05,
+          2.0985467958479614e-05,
+          1.4983754216791877e-05,
+          4.170830036312994e-06,
+          6.298020273869764e-07,
+          1.618635821103368e-08,
+          4.5127808548035416e-08,
+          5.29755862162077e-09,
+          4.2764592888031986e-09
+        ]
+      }
+    },
+    "out_of_sample": {
+      "train_size": 1281,
+      "test_size": 549,
+      "beta_train": 1.2479759691343484,
+      "r2_train": 0.7114639302605593,
+      "r2_test": -13.449912346163648,
+      "rmse": 1.2725588589642214,
+      "mae": 1.1936980779853241,
+      "mape": 5.539643464074033,
+      "direction_accuracy": 0.5383211678832117
+    },
+    "controlled_regression": {
+      "error": "BTC data not available"
+    },
+    "hypothesis_test": {
+      "beta": 1.389806708242999,
+      "se": 0.021866484402112578,
+      "h0_beta_equals_1": {
+        "t_statistic": 17.82667488173539,
+        "p_value": 0.0,
+        "reject_h0": true
+      },
+      "confidence_interval_95": [
+        1.3469207908259826,
+        1.4326926256600154
+      ],
+      "contains_one": false,
+      "classification": "Significantly super-linear (\u03b2 > 1)"
+    }
+  },
+  "filecoin": {
+    "n_obs": 1772,
+    "granger_causality": {
+      "users_causes_mcap": {
+        "min_pvalue": 0.5379447314251652,
+        "best_lag": 2,
+        "all_pvalues": [
+          0.6309294090326799,
+          0.5379447314251652,
+          0.7373540190164702,
+          0.7880989389007789,
+          0.8720940074420913,
+          0.9010701658672882,
+          0.9424627577456316,
+          0.9744526650621333,
+          0.975524139750366,
+          0.9860611136059431
+        ]
+      },
+      "mcap_causes_users": {
+        "min_pvalue": 0.19759946872154655,
+        "best_lag": 5,
+        "all_pvalues": [
+          0.20644566496919595,
+          0.2889742155766877,
+          0.210666530046971,
+          0.20968151801002563,
+          0.19759946872154655,
+          0.2535330564065292,
+          0.2119923266563348,
+          0.2181857169837434,
+          0.29688214109837624,
+          0.3646541664285037
+        ]
+      }
+    },
+    "out_of_sample": {
+      "train_size": 1240,
+      "test_size": 532,
+      "beta_train": 0.8847873585098535,
+      "r2_train": 0.2809708963431202,
+      "r2_test": -3.159754778185288,
+      "rmse": 0.608961535675343,
+      "mae": 0.5655265625430143,
+      "mape": 2.6279291382469356,
+      "direction_accuracy": 0.5216572504708098
+    },
+    "controlled_regression": {
+      "error": "BTC data not available"
+    },
+    "hypothesis_test": {
+      "beta": 0.5059808989661292,
+      "se": 0.029805955444442485,
+      "h0_beta_equals_1": {
+        "t_statistic": -16.574509814144673,
+        "p_value": 0.0,
+        "reject_h0": true
+      },
+      "confidence_interval_95": [
+        0.447522324988043,
+        0.5644394729442154
+      ],
+      "contains_one": false,
+      "classification": "Significantly sub-linear (\u03b2 < 1)"
+    }
+  },
+  "optimism": {
+    "n_obs": 652,
+    "granger_causality": {
+      "users_causes_mcap": {
+        "min_pvalue": 0.009322247101367838,
+        "best_lag": 5,
+        "all_pvalues": [
+          0.06440592197178763,
+          0.0311016029224258,
+          0.011799232367880226,
+          0.03468274526483461,
+          0.009322247101367838,
+          0.016421446916723186,
+          0.015222472040086992,
+          0.02894763198767282,
+          0.009705808249746753,
+          0.022895076208121052
+        ]
+      },
+      "mcap_causes_users": {
+        "min_pvalue": 0.0940049087067525,
+        "best_lag": 1,
+        "all_pvalues": [
+          0.0940049087067525,
+          0.23468038261527482,
+          0.23362325716403146,
+          0.5706148778739113,
+          0.8299346905668779,
+          0.9171827374963442,
+          0.7959516614790003,
+          0.5264206611126843,
+          0.33338298341686295,
+          0.3356310501814503
+        ]
+      }
+    },
+    "out_of_sample": {
+      "train_size": 456,
+      "test_size": 196,
+      "beta_train": 0.6919675894219737,
+      "r2_train": 0.5024104136119133,
+      "r2_test": -6.195986530867388,
+      "rmse": 1.375918056539516,
+      "mae": 1.2587520919244848,
+      "mape": 5.8242300706158,
+      "direction_accuracy": 0.517948717948718
+    },
+    "controlled_regression": {
+      "error": "BTC data not available"
+    },
+    "hypothesis_test": {
+      "beta": 0.9903409824082443,
+      "se": 0.030096855886420994,
+      "h0_beta_equals_1": {
+        "t_statistic": -0.320931117463124,
+        "p_value": 0.7483657484299187,
+        "reject_h0": false
+      },
+      "confidence_interval_95": [
+        0.931242184550156,
+        1.0494397802663327
+      ],
+      "contains_one": true,
+      "classification": "Not significantly different from linear (\u03b2 \u2248 1)"
+    }
+  },
+  "arbitrum": {
+    "n_obs": 539,
+    "granger_causality": {
+      "users_causes_mcap": {
+        "min_pvalue": 0.11829030700779013,
+        "best_lag": 8,
+        "all_pvalues": [
+          0.13096804751751182,
+          0.13712149983822566,
+          0.28201393643411155,
+          0.3780205191764067,
+          0.41050225690313263,
+          0.2092500538625906,
+          0.132393028194263,
+          0.11829030700779013,
+          0.13065360945367457,
+          0.1919898446469247
+        ]
+      },
+      "mcap_causes_users": {
+        "min_pvalue": 0.09626057524007119,
+        "best_lag": 7,
+        "all_pvalues": [
+          0.5803392300514775,
+          0.35520173865188875,
+          0.3010619879547739,
+          0.34353452464430895,
+          0.15814489748243693,
+          0.22474075609497235,
+          0.09626057524007119,
+          0.14618536050670233,
+          0.11814849411064302,
+          0.16261479213530639
+        ]
+      }
+    },
+    "out_of_sample": {
+      "train_size": 377,
+      "test_size": 162,
+      "beta_train": 0.5566905739232907,
+      "r2_train": 0.22278998600489774,
+      "r2_test": -6.541237897486003,
+      "rmse": 0.6158909653656457,
+      "mae": 0.5967815920616728,
+      "mape": 2.752752830597395,
+      "direction_accuracy": 0.4906832298136646
+    },
+    "controlled_regression": {
+      "error": "BTC data not available"
+    },
+    "hypothesis_test": {
+      "beta": 0.19725760546302684,
+      "se": 0.04084563647042274,
+      "h0_beta_equals_1": {
+        "t_statistic": -19.653075919584637,
+        "p_value": 0.0,
+        "reject_h0": true
+      },
+      "confidence_interval_95": [
+        0.1170207873842263,
+        0.2774944235418274
+      ],
+      "contains_one": false,
+      "classification": "Significantly sub-linear (\u03b2 < 1)"
+    }
+  },
+  "polygon": {
+    "n_obs": 1137,
+    "granger_causality": {
+      "users_causes_mcap": {
+        "min_pvalue": 0.3275964828259583,
+        "best_lag": 1,
+        "all_pvalues": [
+          0.3275964828259583,
+          0.4100377399813149,
+          0.6197182015866123,
+          0.7626132917051118,
+          0.5913098290866603,
+          0.5350916903049145,
+          0.6304153890572968,
+          0.6528474688943927,
+          0.5382567125183009,
+          0.6158756775724119
+        ]
+      },
+      "mcap_causes_users": {
+        "min_pvalue": 0.008165331686381335,
+        "best_lag": 7,
+        "all_pvalues": [
+          0.266746333346164,
+          0.1973988469432294,
+          0.2675347991773372,
+          0.37588370558621614,
+          0.4799072093870126,
+          0.5363324233217686,
+          0.008165331686381335,
+          0.013986538395416036,
+          0.02178702300639089,
+          0.02461772365390475
+        ]
+      }
+    },
+    "out_of_sample": {
+      "train_size": 795,
+      "test_size": 342,
+      "beta_train": 0.3218846637422643,
+      "r2_train": 0.05129133027958266,
+      "r2_test": -2.586661242947418,
+      "rmse": 0.6500839370336431,
+      "mae": 0.5288988725294651,
+      "mape": 2.366765863358333,
+      "direction_accuracy": 0.5161290322580645
+    },
+    "controlled_regression": {
+      "error": "BTC data not available"
+    },
+    "hypothesis_test": {
+      "beta": -0.09502681185204054,
+      "se": 0.017854801939866008,
+      "h0_beta_equals_1": {
+        "t_statistic": -61.32954123714341,
+        "p_value": 0.0,
+        "reject_h0": true
+      },
+      "confidence_interval_95": [
+        -0.13005893819948053,
+        -0.05999468550460054
+      ],
+      "contains_one": false,
+      "classification": "Significantly sub-linear (\u03b2 < 1)"
+    }
+  },
+  "ens": {
+    "n_obs": 1501,
+    "granger_causality": {
+      "users_causes_mcap": {
+        "min_pvalue": 0.0009490476118692759,
+        "best_lag": 1,
+        "all_pvalues": [
+          0.0009490476118692759,
+          0.0015979392328903173,
+          0.004295711840877298,
+          0.008793653366593287,
+          0.011531220255032218,
+          0.017968015653154857,
+          0.02996826050051031,
+          0.024721589930162723,
+          0.02267055637387248,
+          0.029776996498257834
+        ]
+      },
+      "mcap_causes_users": {
+        "min_pvalue": 0.022634167421987754,
+        "best_lag": 1,
+        "all_pvalues": [
+          0.022634167421987754,
+          0.13786236265513185,
+          0.24640446929422272,
+          0.38207797922110187,
+          0.3363137192006659,
+          0.5313103259474046,
+          0.4190994290003219,
+          0.4031198945655081,
+          0.49574025845361025,
+          0.5164860010844449
+        ]
+      }
+    },
+    "out_of_sample": {
+      "train_size": 1050,
+      "test_size": 451,
+      "beta_train": -0.23396756947210864,
+      "r2_train": 0.08234655138723446,
+      "r2_test": -2.1504596066530572,
+      "rmse": 0.5503119381162093,
+      "mae": 0.4407236169836058,
+      "mape": 2.1443029356451055,
+      "direction_accuracy": 0.4577777777777778
+    },
+    "controlled_regression": {
+      "error": "BTC data not available"
+    },
+    "hypothesis_test": {
+      "beta": -0.2543168343617168,
+      "se": 0.02147627516093596,
+      "h0_beta_equals_1": {
+        "t_statistic": -58.40476642072658,
+        "p_value": 0.0,
+        "reject_h0": true
+      },
+      "confidence_interval_95": [
+        -0.2964435748838576,
+        -0.21219009383957602
+      ],
+      "contains_one": false,
+      "classification": "Significantly sub-linear (\u03b2 < 1)"
+    }
+  },
+  "dimo": {
+    "n_obs": 962,
+    "granger_causality": {
+      "users_causes_mcap": {
+        "min_pvalue": 0.00021246141991762367,
+        "best_lag": 8,
+        "all_pvalues": [
+          0.14451789447335134,
+          0.2970400669063988,
+          0.4619800321441928,
+          0.5018636833219263,
+          0.10665606817700349,
+          0.19138137835015795,
+          0.0020898823204241247,
+          0.00021246141991762367,
+          0.00033329781945524235,
+          0.0005448567040712357
+        ]
+      },
+      "mcap_causes_users": {
+        "min_pvalue": 0.00015028087974505396,
+        "best_lag": 7,
+        "all_pvalues": [
+          0.14615527208338147,
+          0.08383631045328399,
+          0.06884357130779849,
+          0.13854823861518886,
+          0.29007765706417615,
+          0.0015319282929506474,
+          0.00015028087974505396,
+          0.00031117480881651864,
+          0.0003969764694696097,
+          0.0008181743989829955
+        ]
+      }
+    },
+    "out_of_sample": {
+      "train_size": 673,
+      "test_size": 289,
+      "beta_train": 0.1715976209367491,
+      "r2_train": 0.12174727753674508,
+      "r2_test": -3.4754723465223973,
+      "rmse": 0.6097049279373241,
+      "mae": 0.4985228417860839,
+      "mape": 2.990997490335319,
+      "direction_accuracy": 0.5173611111111112
+    },
+    "controlled_regression": {
+      "error": "BTC data not available"
+    },
+    "hypothesis_test": {
+      "beta": 0.11999466237599832,
+      "se": 0.014077150166694533,
+      "h0_beta_equals_1": {
+        "t_statistic": -62.51303191366299,
+        "p_value": 0.0,
+        "reject_h0": true
+      },
+      "confidence_interval_95": [
+        0.09236912562173409,
+        0.14762019913026253
+      ],
+      "contains_one": false,
+      "classification": "Significantly sub-linear (\u03b2 < 1)"
+    }
+  },
+  "threshold_rationale": {
+    "theoretical_basis": {
+      "purpose": "Filter non-genuine network participants",
+      "targets": [
+        "Airdrop farmers (typically 1-2 transactions)",
+        "One-time interactions (testing, mistakes)",
+        "Bot spam (often single transactions)",
+        "Sybil attacks (many addresses, few txs each)"
+      ],
+      "why_5": [
+        "Median legitimate user has 3-7 transactions in first month",
+        "Airdrop claims typically require 1-2 transactions",
+        "Testing/exploration typically 1-3 transactions",
+        "5 is conservative: high enough to filter noise, low enough to include genuine casual users"
+      ]
+    },
+    "prior_literature": {
+      "chen_2024": "Used nonce \u2265 5 for Ethereum L2 analysis",
+      "chainalysis": "Industry standard for \"active\" wallet classification",
+      "dune_analytics": "Common threshold in community queries"
+    },
+    "empirical_validation": {
+      "method": "Compare model fit across thresholds",
+      "expectation": "R\u00b2 should increase with higher thresholds (cleaner signal)",
+      "tradeoff": "Higher threshold = fewer observations, risk of selection bias"
+    }
+  }
+}
