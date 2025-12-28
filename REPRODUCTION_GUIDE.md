@@ -20,17 +20,25 @@ network-effects-analyzer/
 │   │   ├── *_correlated_data.csv  # Network data (users + market cap)
 │   │   └── regression_results_expanded.csv
 │   └── raw/                       # Raw data sources
-├── scripts/                       # Analysis scripts
+├── scripts/                       # Analysis and utility scripts
 │   ├── run_full_regression.py     # Main regression analysis
 │   ├── create_time_series_figure.py
 │   ├── generate_per_token_graphs.py
-│   └── robustness_analysis.py
+│   ├── robustness_analysis.py
+│   ├── analysis/                  # Network analysis scripts
+│   ├── data_collection/           # Data gathering scripts
+│   └── utilities/                 # Helper scripts
+├── queries/                       # Dune Analytics SQL queries
+│   ├── dune_query_*.sql          # Network-specific queries
+│   └── dune_query_ids.json       # Query ID mapping
 ├── src/                           # Framework code
 │   ├── analysis/
 │   │   ├── metcalfe_model.py      # Core Metcalfe's Law model
 │   │   └── markov_switching.py    # Markov-switching extension
 │   └── data_collection/           # Data collection utilities
-└── dune_query_*.sql               # Dune Analytics queries
+└── tests/                         # Test suite
+    ├── unit/                      # Unit tests
+    └── integration/               # Integration tests
 ```
 
 ## Quick Start
@@ -80,9 +88,9 @@ The paper uses two data sources:
 
 #### A. On-Chain User Data (Dune Analytics)
 
-1. **Execute Dune Queries**: Each network has a SQL query file:
-   - `dune_query_ethereum_active_addresses_nonce5.sql`
-   - `dune_query_uniswap_active_addresses_nonce5.sql`
+1. **Execute Dune Queries**: Each network has a SQL query file in `queries/`:
+   - `queries/dune_query_ethereum_active_addresses_nonce5.sql`
+   - `queries/dune_query_uniswap_active_addresses_nonce5.sql`
    - etc.
 
 2. **Export Results**: For each query:
@@ -92,8 +100,8 @@ The paper uses two data sources:
 
 3. **Alternative**: Use provided scripts (requires Dune API key):
    ```bash
-   python scripts/collect_defi_data.py
-   python scripts/collect_new_networks.py
+   python scripts/data_collection/collect_defi_data.py
+   python scripts/data_collection/collect_new_networks.py
    ```
 
 #### B. Market Cap Data (CoinGecko)
@@ -114,7 +122,7 @@ COINGECKO_API_KEY=your_key_here
 Merge user and market cap data:
 
 ```bash
-python scripts/correlate_dune_coingecko.py
+python scripts/data_collection/correlate_dune_coingecko.py
 ```
 
 This creates `*_correlated_data.csv` files in `data/processed/` with columns:
