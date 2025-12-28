@@ -11,11 +11,11 @@ Each network has a corresponding SQL query file:
 
 ## Query Configuration
 
-- **`dune_query_ids.json`** - Maps network names to Dune query IDs
+- `dune_query_ids.json` - Maps network names to Dune query IDs
 
 ## Active User Definition
 
-All queries use the **nonce ≥ 5** threshold to filter out:
+All queries use the nonce >= 5 threshold to filter out:
 - Airdrop farmers
 - Bot transactions
 - Testing/exploration addresses
@@ -25,7 +25,7 @@ This ensures we count only genuine network participants.
 
 ## Usage
 
-1. Execute queries on [Dune Analytics](https://dune.com)
+1. Execute queries on Dune Analytics
 2. Export results as CSV
 3. Use data collection scripts to merge with market cap data
 

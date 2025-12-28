@@ -4,23 +4,23 @@ This document describes the organization of the Network Effects Analyzer reposit
 
 ## Top-Level Directories
 
-### `paper/`
+### paper/
 Academic paper and all associated figures.
 - `paper.tex` - LaTeX source
 - `paper.pdf` - Compiled PDF
 - `references.bib` - Bibliography
 - `figures/` - All paper figures including per-token visualizations
 
-### `src/`
+### src/
 Core framework code (installable Python package).
 - `analysis/` - Metcalfe's Law and Markov-switching models
 - `data_collection/` - Data collection utilities
 - `utils/` - Helper functions
 - `visualization/` - Plotting utilities
 
-### `scripts/`
+### scripts/
 Analysis and utility scripts organized by function.
-- **Root level**: Main analysis scripts
+- Root level: Main analysis scripts
   - `run_full_regression.py` - Generates Table 1
   - `create_time_series_figure.py` - Generates Figure 6
   - `generate_per_token_graphs.py` - Creates per-token visualizations
@@ -29,23 +29,23 @@ Analysis and utility scripts organized by function.
 - `data_collection/` - Data gathering and processing scripts
 - `utilities/` - Helper and utility scripts
 
-### `queries/`
+### queries/
 Dune Analytics SQL queries for extracting on-chain data.
 - `dune_query_*.sql` - Network-specific queries
 - `dune_query_ids.json` - Query ID mapping
 
-### `data/`
+### data/
 All data files.
 - `processed/` - Cleaned, merged datasets
 - `raw/` - Raw data sources (gitignored)
 - `cache/` - API response cache (gitignored)
 
-### `tests/`
+### tests/
 Test suite.
 - `unit/` - Unit tests for framework components
 - `integration/` - Integration tests for scripts
 
-### `docs/`
+### docs/
 Additional documentation.
 - `api.md` - API documentation
 
@@ -61,22 +61,22 @@ Additional documentation.
 
 ## Navigation Guide
 
-**To reproduce the paper:**
+To reproduce the paper:
 1. See `REPRODUCTION_GUIDE.md`
 2. Run `scripts/run_full_regression.py`
 3. Generate figures with `scripts/create_time_series_figure.py`
 
-**To use the framework:**
+To use the framework:
 1. See `README.md` Quick Start
 2. Import from `src.analysis.metcalfe_model`
 3. See `docs/api.md` for API details
 
-**To collect new data:**
+To collect new data:
 1. Use queries in `queries/`
 2. Run scripts in `scripts/data_collection/`
 3. See `REPRODUCTION_GUIDE.md` Step 1
 
-**To run tests:**
+To run tests:
 ```bash
 pytest tests/
 ```
