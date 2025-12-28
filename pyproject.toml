@@ -1,0 +1,135 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "network-effects-analyzer"
+version = "1.0.0"
+description = "A framework for analyzing network effects in blockchain networks using Metcalfe's Law"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Danny Liu", email = "danny@example.com"}
+]
+maintainers = [
+    {name = "Danny Liu", email = "danny@example.com"}
+]
+keywords = [
+    "blockchain",
+    "cryptocurrency",
+    "network-effects",
+    "metcalfe",
+    "valuation",
+    "depin",
+    "ethereum",
+    "layer2"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Office/Business :: Financial :: Investment",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "pandas>=1.5.0",
+    "numpy>=1.21.0",
+    "scipy>=1.9.0",
+    "statsmodels>=0.13.0",
+    "requests>=2.28.0",
+    "python-dotenv>=0.20.0",
+    "matplotlib>=3.5.0",
+    "seaborn>=0.12.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+]
+docs = [
+    "sphinx>=6.0.0",
+    "sphinx-rtd-theme>=1.2.0",
+    "myst-parser>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/username/network-effects-analyzer"
+Documentation = "https://github.com/username/network-effects-analyzer#readme"
+Repository = "https://github.com/username/network-effects-analyzer.git"
+Issues = "https://github.com/username/network-effects-analyzer/issues"
+Changelog = "https://github.com/username/network-effects-analyzer/blob/main/CHANGELOG.md"
+
+[project.scripts]
+network-effects = "src.cli:main"
+
+[tool.setuptools]
+packages = ["src", "src.analysis", "src.data_collection", "src.models", "src.utils", "src.visualization"]
+
+[tool.setuptools.package-data]
+"*" = ["*.sql", "*.json"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --cov=src --cov-report=term-missing"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+skip = [".gitignore", ".dockerignore", "venv", ".venv"]
+skip_glob = ["venv/*", ".venv/*"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+exclude = ["venv", ".venv", "tests"]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["tests/*", "venv/*", ".venv/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]

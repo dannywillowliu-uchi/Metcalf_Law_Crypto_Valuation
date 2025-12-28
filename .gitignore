@@ -1,0 +1,87 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# Data (large files - use Git LFS if needed)
+data/cache/
+data/raw/
+*.csv
+!data/processed/regression_results_expanded.csv
+
+# LaTeX
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (if using)
+node_modules/
+package-lock.json
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Output files
+*.png
+*.jpg
+*.pdf
+!paper/paper.pdf
+!paper/figures/*.pdf
+
+# Internal research and planning notes
+API_RESEARCH_*.md
+CREDIT_USAGE_*.md
+CURRENT_*.md
+DATA_*.md
+DUNE_*.md
+FILECOIN_*.md
+LAYER2_*.md
+MARKET_CAP_*.md
+MARKOV_*.md
+NETWORK_*.md
+NEXT_*.md
+PRIORITIZED_*.md
+PROJECT_*.md
+PROGRESS_*.md
+QUERIES_*.md
+RECOMMENDED_*.md
+REGIME_*.md
+REMAINING_*.md
+RESULTS_*.md
+TASK_*.md
+THESIS_*.md
+TOKEN_*.md
+USER_*.md
+VERIFICATION_*.md
+WHAT_*.md
+WHY_*.md
+GITHUB_SETUP.md
+IMPLEMENTATION_NOTES.md
+paper.md
