@@ -39,6 +39,22 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+### Analyze Ethereum (Example)
+
+The easiest way to get started is with the Ethereum example:
+
+```bash
+python examples/analyze_ethereum.py
+```
+
+This will:
+- Load Ethereum data
+- Fit the Metcalfe's Law model
+- Display beta coefficient and classification
+- Compare to published results
+
+See [QUICKSTART.md](QUICKSTART.md) for step-by-step instructions.
+
 ### Reproduce Paper Results
 
 ```bash
