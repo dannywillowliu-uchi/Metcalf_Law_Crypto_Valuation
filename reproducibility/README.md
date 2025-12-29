@@ -167,9 +167,14 @@ model = MetcalfeModel()
 results = model.fit(users, market_cap)
 ```
 
+**fit(users, market_cap, confidence_level=0.95)**
+
+Fit the Metcalfe's Law model: `log(market_cap) = alpha + beta * log(users)`
+
 **Parameters:**
 - `users`: Array-like of active user counts
 - `market_cap`: Array-like of market capitalization values
+- `confidence_level`: Confidence level for intervals (default: 0.95)
 
 **Returns:**
 Dictionary with keys:
@@ -178,11 +183,32 @@ Dictionary with keys:
 - `r_squared`: R-squared (model fit)
 - `std_error`: Standard error of beta
 - `n`: Number of observations
+- `p_value`: P-value for beta coefficient
+- `confidence_interval`: Confidence interval tuple
 
-**Methods:**
-- `fit(users, market_cap)`: Fit the model
-- `predict(users)`: Predict market cap for given user counts
-- `classify()`: Classify network (Sustainable/Borderline/Unsustainable)
+**predict(users)**
+
+Predict market cap for given user counts.
+
+**Parameters:**
+- `users`: Array-like of user counts
+
+**Returns:**
+Array of predicted market cap values
+
+**get_results()**
+
+Get all model parameters.
+
+**Returns:**
+Dictionary of all model parameters
+
+**classify()**
+
+Classify network based on beta value.
+
+**Returns:**
+String: "Sustainable", "Borderline", or "Unsustainable"
 
 ## Methodology
 
