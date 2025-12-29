@@ -152,33 +152,5 @@ network-effects-analyzer/
 - On-Chain Data: [Dune Analytics](https://dune.com) (SQL queries included)
 - Market Data: [CoinGecko API](https://www.coingecko.com/en/api)
 
-## Citation
-
-If you use this code or reproduce results, please cite:
-
-```bibtex
-@article{liu2025network,
-  title={Network Effects Across Crypto Categories: A Metcalfe's Law Framework for Assessing Sustainability},
-  author={Liu, Danny},
-  journal={...},
-  year={2025}
-}
-```
-
-## Contributing
-
-Contributions welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Dune Analytics for on-chain data access
-- CoinGecko for market data
-- The open-source crypto data community
-
----
 
 **Note**: This framework measures *token value* sustainability, not protocol quality. A successful protocol can have low-beta tokens if users don't need to hold the token to participate.
