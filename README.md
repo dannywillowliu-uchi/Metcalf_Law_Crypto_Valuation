@@ -2,17 +2,24 @@
 
 A Metcalfe's Law Framework for Assessing Token Value Sustainability Across Crypto Categories
 
-An open-source Python framework for analyzing network effects in blockchain networks using Metcalfe's Law. This repository contains the complete code, data, and analysis for the paper:
+This repository contains two primary components:
+
+1. **Academic Paper**: Complete research paper analyzing network effects across 15 blockchain networks
+2. **Open-Source Framework**: Python framework for analyzing network effects in any blockchain network
+
+## Paper
 
 **"Network Effects Across Crypto Categories: A Metcalfe's Law Framework for Assessing Sustainability"**
 
-## Key Findings
+[Read the paper](paper/paper.pdf) | [View LaTeX source](paper/paper.tex)
+
+### Key Findings
 
 - 100% success rate: All five networks with beta > 1 (Ethereum, Render, Livepeer, Chainlink, Optimism) delivered strong returns (43-132%/year)
 - Token-utility coupling matters: Networks where tokens are required for usage show sustainable network effects
 - Protocol success does not imply token success: Major DeFi protocols (Aave, Uniswap, Compound) show low beta despite protocol success
 
-## Results Summary
+### Results Summary
 
 | Network | Category | Beta | Classification | Returns |
 |---------|----------|------|----------------|---------|
@@ -27,9 +34,50 @@ An open-source Python framework for analyzing network effects in blockchain netw
 
 *Uniswap's returns were market-driven, not network-effect driven
 
-## Quick Start
+## Framework
 
-### Installation
+The open-source framework enables analysis of network effects for any blockchain network using Metcalfe's Law.
+
+### Quick Start
+
+```python
+from src.analysis.metcalfe_model import MetcalfeModel
+import pandas as pd
+
+# Load your data
+df = pd.read_csv('your_network_data.csv')
+
+# Fit model
+model = MetcalfeModel()
+results = model.fit(df['users'], df['market_cap'])
+
+print(f"Beta = {results['beta']:.2f}")
+print(f"R² = {results['r_squared']:.2f}")
+
+# Classify
+if results['beta'] > 1.0:
+    print("Sustainable network effects")
+elif results['beta'] < 1.0:
+    print("Unsustainable network effects")
+```
+
+### Example: Analyze Ethereum
+
+```bash
+python examples/analyze_ethereum.py
+```
+
+See [QUICKSTART.md](QUICKSTART.md) for detailed instructions.
+
+### Framework Usage Documentation
+
+Complete framework usage information, including data collection workflows and analysis scripts, is available in the [reproducibility](reproducibility/) folder:
+
+- [Framework Usage Guide](reproducibility/README.md) - Complete guide to using the framework
+- [Reproduction Scripts](reproducibility/scripts/) - Scripts for data collection and analysis
+- [SQL Queries](reproducibility/queries/) - Dune Analytics queries for on-chain data
+
+## Installation
 
 ```bash
 git clone https://github.com/yourusername/network-effects-analyzer.git
@@ -39,23 +87,9 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### Analyze Ethereum (Example)
+## Reproducing Paper Results
 
-The easiest way to get started is with the Ethereum example:
-
-```bash
-python examples/analyze_ethereum.py
-```
-
-This will:
-- Load Ethereum data
-- Fit the Metcalfe's Law model
-- Display beta coefficient and classification
-- Compare to published results
-
-See [QUICKSTART.md](QUICKSTART.md) for step-by-step instructions.
-
-### Reproduce Paper Results
+To reproduce all results from the paper:
 
 ```bash
 # Run main regression analysis (generates Table 1)
@@ -75,7 +109,7 @@ See [REPRODUCTION_GUIDE.md](REPRODUCTION_GUIDE.md) for detailed instructions.
 
 ```
 network-effects-analyzer/
-├── paper/                          # LaTeX paper and figures
+├── paper/                          # Academic paper (LaTeX source and PDF)
 │   ├── paper.tex                  # Main paper source
 │   ├── paper.pdf                  # Compiled paper
 │   ├── references.bib             # Bibliography
@@ -84,73 +118,34 @@ network-effects-analyzer/
 │       ├── fig4_sustainable_vs_unsustainable.pdf
 │       ├── fig6_time_series_users_mcap.pdf
 │       └── per_token/             # Per-token visualizations
-├── data/                          # All data files
-│   ├── processed/                 # Cleaned, merged data
-│   │   ├── *_correlated_data.csv  # Network data (users + market cap)
-│   │   └── regression_results_expanded.csv
-│   └── raw/                       # Raw data sources
-├── scripts/                       # Analysis and utility scripts
-│   ├── run_full_regression.py     # Main regression analysis
-│   ├── create_time_series_figure.py
-│   ├── generate_per_token_graphs.py
-│   ├── robustness_analysis.py
-│   ├── analysis/                  # Network analysis scripts
-│   ├── data_collection/           # Data gathering scripts
-│   └── utilities/                 # Helper scripts
-├── queries/                       # Dune Analytics SQL queries
-│   ├── dune_query_*.sql          # Network-specific queries
-│   └── dune_query_ids.json       # Query ID mapping
-├── src/                           # Framework code
+├── src/                           # Framework code (installable package)
 │   ├── analysis/
 │   │   ├── metcalfe_model.py      # Core Metcalfe's Law model
 │   │   └── markov_switching.py    # Markov-switching extension
 │   └── data_collection/           # Data collection utilities
+├── reproducibility/               # Framework usage documentation and scripts
+│   ├── README.md                  # Framework usage guide
+│   ├── scripts/                   # Analysis and data collection scripts
+│   └── queries/                   # SQL queries for data collection
+├── examples/                      # Example scripts
+│   └── analyze_ethereum.py        # Ethereum analysis example
+├── scripts/                       # Main analysis scripts
+│   ├── run_full_regression.py     # Main regression analysis
+│   ├── create_time_series_figure.py
+│   ├── generate_per_token_graphs.py
+│   └── robustness_analysis.py
+├── queries/                       # Dune Analytics SQL queries
+├── data/                          # Data files
 └── tests/                         # Test suite
-    ├── unit/                      # Unit tests
-    └── integration/               # Integration tests
 ```
-
-## Framework Usage
-
-Analyze any blockchain network:
-
-```python
-from src.analysis.metcalfe_model import MetcalfeModel
-import pandas as pd
-
-# Load your data
-df = pd.read_csv('your_network_data.csv')
-
-# Fit model
-model = MetcalfeModel()
-results = model.fit(df['users'], df['market_cap'])
-
-print(f"β = {results['beta']:.2f}")
-print(f"R² = {results['r_squared']:.2f}")
-
-# Classify
-if results['beta'] > 1.0:
-    print("✅ Sustainable network effects")
-elif results['beta'] < 1.0:
-    print("❌ Unsustainable network effects")
-```
-
-## Per-Token Visualizations
-
-The repository includes detailed visualizations for each network:
-
-- **Time Series**: Users and market cap over time
-- **Log-Log Scatter**: Metcalfe's Law fit visualization
-
-Located in `paper/figures/per_token/`:
-- `{network}_time_series.pdf`
-- `{network}_log_log_scatter.pdf`
 
 ## Documentation
 
-- [REPRODUCTION_GUIDE.md](REPRODUCTION_GUIDE.md): Complete guide to reproducing all results
-- [paper/paper.pdf](paper/paper.pdf): Full academic paper
-- [docs/](docs/): Additional documentation
+- [Paper](paper/paper.pdf) - Full academic paper
+- [QUICKSTART.md](QUICKSTART.md) - Quick start guide for beginners
+- [REPRODUCTION_GUIDE.md](REPRODUCTION_GUIDE.md) - Complete reproduction instructions
+- [Framework Usage](reproducibility/README.md) - Framework usage documentation
+- [STRUCTURE.md](STRUCTURE.md) - Repository structure guide
 
 ## Data Sources
 
@@ -186,4 +181,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-**Note**: This framework measures *token value* sustainability, not protocol quality. A successful protocol can have low-β tokens if users don't need to hold the token to participate.
+**Note**: This framework measures *token value* sustainability, not protocol quality. A successful protocol can have low-beta tokens if users don't need to hold the token to participate.

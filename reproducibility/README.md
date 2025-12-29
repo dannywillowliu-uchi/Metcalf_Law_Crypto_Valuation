@@ -1,107 +1,226 @@
-# Reproducibility Package
+# Framework Usage Guide
 
-This folder contains all code necessary to reproduce the analysis in "Valuing Blockchain Networks via Metcalfe's Law."
+This folder contains complete documentation and scripts for using the Network Effects Analyzer framework. The framework enables analysis of network effects for any blockchain network using Metcalfe's Law.
 
-## Directory Structure
+## Contents
 
+- **Framework Usage Documentation**: This README provides complete instructions for using the framework
+- **Analysis Scripts**: Python scripts for data collection, regression analysis, and robustness checks
+- **SQL Queries**: Dune Analytics queries for extracting on-chain user activity data
+
+## Quick Start
+
+### Using the Framework
+
+```python
+from src.analysis.metcalfe_model import MetcalfeModel
+import pandas as pd
+
+# Load your data (must have 'users' and 'market_cap' columns)
+df = pd.read_csv('your_network_data.csv')
+df = df[(df['users'] > 0) & (df['market_cap'] > 0)]
+
+# Fit the model
+model = MetcalfeModel()
+results = model.fit(df['users'], df['market_cap'])
+
+# View results
+print(f"Beta: {results['beta']:.2f}")
+print(f"R-squared: {results['r_squared']:.2f}")
+
+# Classify network
+if results['beta'] > 1.0:
+    print("Sustainable network effects")
+else:
+    print("Unsustainable network effects")
 ```
-reproducibility/
-├── queries/          # Dune Analytics SQL queries for user data
-├── scripts/          # Python scripts for data collection and analysis
-└── README.md         # This file
-```
 
-## Requirements
+### Example Script
 
-### Python Dependencies
-```bash
-pip install pandas numpy scipy scikit-learn requests python-dotenv
-```
-
-### API Keys
-You'll need:
-- **Dune Analytics API key**: For executing queries and downloading results
-- **CoinGecko API key** (optional): For market cap data (free tier works but has rate limits)
-
-Set environment variables:
-```bash
-export DUNE_API_KEY="your_dune_api_key"
-export COINGECKO_API_KEY="your_coingecko_api_key"  # Optional
-```
+See `examples/analyze_ethereum.py` for a complete example.
 
 ## Data Collection Workflow
 
-### Step 1: Execute Dune Queries
+### Step 1: Collect On-Chain User Data
 
-The `queries/` folder contains SQL queries for each network. To collect user data:
+The `queries/` folder contains SQL queries for extracting active user data from Dune Analytics.
+
+**For each network:**
 
 1. Go to [Dune Analytics](https://dune.com)
-2. Create a new query and paste the SQL from the appropriate file
-3. Execute the query (costs ~300 credits per query)
-4. Note the query ID for use in the collection scripts
+2. Create a new query
+3. Paste the SQL from the appropriate query file
+4. Execute the query
+5. Export results as CSV
+6. Save to `data/raw/dune/`
 
 **Query Files:**
 
-| Network | Query File | Metric |
-|---------|------------|--------|
-| Ethereum | `dune_query_ethereum_active_addresses_nonce5.sql` | Addresses with ≥5 transactions |
-| Arbitrum | `dune_query_arbitrum_active_addresses_nonce5.sql` | Addresses with ≥5 transactions |
-| Optimism | `dune_query_optimism_active_addresses_nonce5.sql` | Addresses with ≥5 transactions |
-| Polygon | `dune_query_polygon_active_addresses_nonce5.sql` | Addresses with ≥5 transactions |
-| Uniswap | `dune_query_uniswap_active_addresses_nonce5.sql` | Addresses with ≥5 swaps |
-| Aave | `dune_query_aave_active_addresses_nonce5.sql` | Addresses with ≥5 AAVE transfers |
-| Compound | `dune_query_compound_active_addresses_nonce5.sql` | Addresses with ≥5 COMP transfers |
-| MakerDAO | `dune_query_maker_active_addresses_nonce5.sql` | Addresses with ≥5 MKR transfers |
-| SushiSwap | `dune_query_sushiswap_active_addresses_nonce5.sql` | Addresses with ≥5 SUSHI transfers |
-| Chainlink | `dune_query_chainlink_active_addresses_nonce5.sql` | Addresses with ≥5 LINK transfers |
-| Livepeer | `dune_query_livepeer_active_addresses_nonce5.sql` | Addresses with ≥5 LPT transfers |
-| The Graph | `dune_query_thegraph_active_addresses_nonce5.sql` | Addresses with ≥5 GRT transfers |
-| Render | (via Token Terminal) | Addresses with ≥5 RNDR transfers |
-| ENS | (via Dune) | Addresses with ≥5 ENS interactions |
-| DIMO | (via Dune) | Addresses with ≥5 DIMO transfers |
+| Network | Query File |
+|---------|------------|
+| Ethereum | `queries/dune_query_ethereum_active_addresses_nonce5.sql` |
+| Arbitrum | `queries/dune_query_arbitrum_active_addresses_nonce5.sql` |
+| Optimism | `queries/dune_query_optimism_active_addresses_nonce5.sql` |
+| Polygon | `queries/dune_query_polygon_active_addresses_nonce5.sql` |
+| Uniswap | `queries/dune_query_uniswap_active_addresses_nonce5.sql` |
+| Aave | `queries/dune_query_aave_active_addresses_nonce5.sql` |
+| Compound | `queries/dune_query_compound_active_addresses_nonce5.sql` |
+| MakerDAO | `queries/dune_query_maker_active_addresses_nonce5.sql` |
+| SushiSwap | `queries/dune_query_sushiswap_active_addresses_nonce5.sql` |
+| Chainlink | `queries/dune_query_chainlink_active_addresses_nonce5.sql` |
+| Livepeer | `queries/dune_query_livepeer_active_addresses_nonce5.sql` |
+| The Graph | `queries/dune_query_thegraph_active_addresses_nonce5.sql` |
 
-### Step 2: Collect Data
+### Step 2: Collect Market Cap Data
 
-After executing queries on Dune:
+Market cap data is collected via CoinGecko API:
 
 ```bash
-# Collect DeFi network data (Aave, Compound, Maker, SushiSwap)
-python scripts/collect_defi_data.py
-
-# Collect other networks (Livepeer, Uniswap, The Graph)
-python scripts/collect_new_networks.py
+python scripts/data_collection/collect_coingecko_safe.py {network}
 ```
 
-These scripts:
-1. Download user data from executed Dune queries (free via CSV export)
-2. Fetch market cap data from CoinGecko
-3. Merge and save to `data/processed/`
+**Requirements:**
+- CoinGecko API key (free tier available)
+- Set in `.env`: `COINGECKO_API_KEY=your_key_here`
 
-### Step 3: Run Regression Analysis
+### Step 3: Merge Data
+
+Merge user and market cap data:
+
+```bash
+python scripts/data_collection/correlate_dune_coingecko.py {network}
+```
+
+This creates `data/processed/{network}_correlated_data.csv` with columns:
+- `date`: Date
+- `users`: Active users (nonce >= 5)
+- `market_cap`: Market capitalization (USD)
+
+### Step 4: Run Analysis
 
 ```bash
 python scripts/run_full_regression.py
 ```
 
 This outputs:
-- Regression results table (β, SE, R², classification)
-- Performance validation (annualized returns by β group)
+- Regression results table (beta, SE, R-squared, classification)
+- Performance validation (annualized returns by beta group)
 - Saves results to `data/processed/regression_results_expanded.csv`
 
-### Step 4: Robustness Analysis (Optional)
+## Analysis Scripts
 
+### run_full_regression.py
+
+Main regression analysis script. Generates Table 1 from the paper.
+
+**Usage:**
+```bash
+python scripts/run_full_regression.py
+```
+
+**Output:**
+- Console: Summary statistics and results
+- CSV: `data/processed/regression_results_expanded.csv`
+
+### robustness_analysis.py
+
+Robustness checks and sensitivity analysis.
+
+**Usage:**
 ```bash
 python scripts/robustness_analysis.py
 ```
 
-Tests sensitivity to:
+**Tests:**
 - Alternative nonce thresholds (3, 5, 10)
 - Rolling window regressions
 - Subsample analysis
 
-## Output
+### collect_defi_data.py
 
-The main output is `data/processed/regression_results_expanded.csv` containing:
+Collects data for DeFi networks (Aave, Compound, Maker, SushiSwap).
+
+**Usage:**
+```bash
+python scripts/data_collection/collect_defi_data.py
+```
+
+### collect_new_networks.py
+
+Collects data for other networks (Livepeer, Uniswap, The Graph).
+
+**Usage:**
+```bash
+python scripts/data_collection/collect_new_networks.py
+```
+
+## Framework API
+
+### MetcalfeModel
+
+Core model class for Metcalfe's Law regression.
+
+```python
+from src.analysis.metcalfe_model import MetcalfeModel
+
+model = MetcalfeModel()
+results = model.fit(users, market_cap)
+```
+
+**Parameters:**
+- `users`: Array-like of active user counts
+- `market_cap`: Array-like of market capitalization values
+
+**Returns:**
+Dictionary with keys:
+- `beta`: Beta coefficient (elasticity of market cap w.r.t. users)
+- `alpha`: Alpha coefficient (intercept)
+- `r_squared`: R-squared (model fit)
+- `std_error`: Standard error of beta
+- `n`: Number of observations
+
+**Methods:**
+- `fit(users, market_cap)`: Fit the model
+- `predict(users)`: Predict market cap for given user counts
+- `classify()`: Classify network (Sustainable/Borderline/Unsustainable)
+
+## Methodology
+
+### User Metric (nonce >= 5)
+
+We filter to addresses with at least 5 interactions to exclude:
+- Temporary/one-time addresses
+- Spam accounts
+- Airdrop farmers
+- Bot transactions
+
+This threshold was selected via AIC model selection in the original Metcalfe's Law paper.
+
+### Classification
+
+- **Sustainable (beta > 1)**: Token value scales super-linearly with users
+- **Borderline (beta ≈ 1)**: Token value scales linearly with users
+- **Unsustainable (beta < 1)**: Token value scales sub-linearly with users
+
+### Model Specification
+
+The model estimates:
+
+```
+log(market_cap) = alpha + beta * log(users) + error
+```
+
+Where:
+- `beta` measures the elasticity of market cap with respect to users
+- `beta > 1` indicates super-linear scaling (sustainable network effects)
+- `beta = 1` indicates linear scaling (Metcalfe's Law baseline)
+- `beta < 1` indicates sub-linear scaling (unsustainable)
+
+## Output Format
+
+### Regression Results
+
+The main output is `data/processed/regression_results_expanded.csv`:
 
 | Column | Description |
 |--------|-------------|
@@ -109,31 +228,64 @@ The main output is `data/processed/regression_results_expanded.csv` containing:
 | category | Network category (L1, L2, DeFi, etc.) |
 | beta | Metcalfe's Law coefficient |
 | se | Standard error |
-| r_squared | Model fit |
-| ci_lower, ci_upper | 95% confidence interval |
+| r_squared | Model fit (R-squared) |
 | classification | Sustainable/Borderline/Unsustainable |
 | annualized_return | Annualized price return |
 
-## Methodology Notes
+## Requirements
 
-### User Metric (nonce ≥ 5)
-We filter to addresses with at least 5 interactions to exclude:
-- Temporary/one-time addresses
-- Spam accounts
-- Airdrop farmers
+### Python Dependencies
 
-This follows the methodology in the original Metcalfe's Law paper which found nonce ≥ 5 optimal via AIC model selection.
+```bash
+pip install -r requirements.txt
+```
 
-### Classification
-- **Sustainable (β > 1)**: 95% CI entirely above 1
-- **Borderline (β ≈ 1)**: CI includes 1
-- **Unsustainable (β < 1)**: 95% CI entirely below 1
+### API Keys
+
+- **Dune Analytics**: For executing queries (optional, can use CSV exports)
+- **CoinGecko**: For market cap data (free tier available)
+
+Set in `.env`:
+```
+DUNE_API_KEY=your_dune_api_key
+COINGECKO_API_KEY=your_coingecko_api_key
+```
+
+## Troubleshooting
+
+### Data File Not Found
+
+Ensure data files are in `data/processed/` with format:
+- `{network}_correlated_data.csv`
+
+### API Rate Limits
+
+CoinGecko free tier has rate limits. Use `collect_coingecko_safe.py` which includes delays.
+
+### Import Errors
+
+Ensure you're in the project root and dependencies are installed:
+```bash
+pip install -r requirements.txt
+```
+
+## Additional Resources
+
+- [QUICKSTART.md](../QUICKSTART.md) - Beginner-friendly quick start guide
+- [REPRODUCTION_GUIDE.md](../REPRODUCTION_GUIDE.md) - Complete reproduction instructions
+- [Paper](../paper/paper.pdf) - Full academic paper
 
 ## Citation
 
-If you use this code, please cite:
-```
-[Paper citation to be added]
+If you use this framework, please cite:
+
+```bibtex
+@article{liu2025network,
+  title={Network Effects Across Crypto Categories: A Metcalfe's Law Framework for Assessing Sustainability},
+  author={Liu, Danny},
+  journal={...},
+  year={2025}
+}
 ```
 
 ## License
