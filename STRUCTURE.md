@@ -18,6 +18,12 @@ Core framework code (installable Python package).
 - `utils/` - Helper functions
 - `visualization/` - Plotting utilities
 
+### reproducibility/
+Framework usage documentation and scripts. Contains complete guide to using the framework.
+- `README.md` - Framework usage guide with API documentation
+- `scripts/` - Analysis and data collection scripts
+- `queries/` - SQL queries for data collection
+
 ### scripts/
 Analysis and utility scripts organized by function.
 - Root level: Main analysis scripts
@@ -67,9 +73,10 @@ To reproduce the paper:
 3. Generate figures with `scripts/create_time_series_figure.py`
 
 To use the framework:
-1. See `README.md` Quick Start
-2. Import from `src.analysis.metcalfe_model`
-3. See `docs/api.md` for API details
+1. See `README.md` Framework section
+2. See `reproducibility/README.md` for complete framework usage guide
+3. Import from `src.analysis.metcalfe_model`
+4. See `examples/analyze_ethereum.py` for example usage
 
 To collect new data:
 1. Use queries in `queries/`
